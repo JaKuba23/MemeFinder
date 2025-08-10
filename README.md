@@ -88,6 +88,3 @@ MemeFinder/
 
 MIT License
 
----
-
-
