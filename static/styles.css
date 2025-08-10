@@ -1,0 +1,209 @@
+body {
+    background: #fff;
+    color: #111;
+    font-family: monospace, 'Montserrat', Arial, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+    background: #000;
+    color: #fff;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #111;
+    padding: 16px 32px;
+    background: #fff;
+    transition: background 0.3s, border-color 0.3s;
+}
+body.dark header {
+    background: #000;
+    border-bottom: 2px solid #fff;
+}
+
+.logo {
+    font-size: 1.3em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #111;
+}
+body.dark .logo {
+    color: #fff;
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-left: 16px;
+    transition: color 0.3s;
+    color: #111;
+}
+body.dark #theme-toggle {
+    color: #fff; 
+}
+
+#theme-toggle.logo {
+    background: none;
+    border: none;
+    font-size: 1.3em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #111;
+    cursor: pointer;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 8px;
+}
+
+h1 {
+    font-size: 2.2em;
+    font-weight: bold;
+    margin: 32px 0 8px 0;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    color: #444;
+    margin-bottom: 32px;
+    text-align: center;
+}
+body.dark .subtitle {
+    color: #fff;
+}
+
+.meme-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 320px;
+    max-width: 600px;
+    width: 100%;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    background: #fff;
+    border: 2px solid #111;
+    transition: background 0.3s, border-color 0.3s;
+}
+body.dark .meme-box {
+    background: #000;
+    border: 2px solid #fff;
+}
+
+.meme-box img {
+    max-width: 100%;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    background: #eee;
+    opacity: 0;
+    transition: opacity 0.6s;
+}
+body.dark .meme-box img {
+    background: #333;
+}
+
+.meme-box img[style*="opacity: 1"] {
+    opacity: 1;
+}
+
+.subreddit {
+    font-size: 1em;
+    color: #222;
+    margin-bottom: 8px;
+    opacity: 0;
+    transition: opacity 0.6s;
+}
+body.dark .subreddit {
+    color: #fff;
+}
+
+.subreddit span {
+    font-weight: bold;
+}
+
+.refresh-btn {
+    background: none;
+    border: 2px solid #111;
+    padding: 8px 24px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-bottom: 24px;
+    transition: border-color 0.3s, color 0.3s;
+}
+body.dark .refresh-btn {
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.loader {
+    position: absolute;
+    top: auto;
+    left: auto;
+    transform: translate(-50%, -50%);
+    border: 4px solid #eee;
+    border-top: 4px solid #111;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    animation: spin 1s linear infinite;
+    margin: 0;
+    display: none;
+    background: none;
+    z-index: 2;
+}
+body.dark .loader {
+    border: 4px solid #222;
+    border-top: 4px solid #fff;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg);}
+    100% { transform: rotate(360deg);}
+}
+
+footer {
+    border-top: 2px solid #111;
+    background: #fff;
+    text-align: center;
+    padding: 16px 0;
+    font-size: 1em;
+    color: #444;
+    margin-top: auto;
+    transition: background 0.3s, border-color 0.3s, color 0.3s;
+}
+body.dark footer {
+    background: #222;
+    border-top: 2px solid #444;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    header, main, .meme-box {
+        padding: 8px;
+    }
+    h1 {
+        font-size: 1.2em;
+    }
+    .meme-box {
+        padding: 12px;
+        min-height: 180px;
+    }
+}

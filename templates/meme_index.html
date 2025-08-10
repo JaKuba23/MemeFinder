@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MemeFinder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Minimalist Flask app for random Reddit memes.">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">MemeFinder</div>
+        <button id="theme-toggle" class="logo" aria-label="Toggle dark mode">Dark Mode</button>
+    </header>
+    <main>
+        <h1>Get a random meme from Reddit, instantly.</h1>
+        <p class="subtitle">Just by clicking a button, without any hassle.</p>
+        <div class="meme-box">
+            <div id="loader" class="loader"></div>
+            <img id="meme-img" src="{{ meme_pic }}" alt="Meme" style="display:none;">
+            <div class="subreddit" id="subreddit" style="display:none;">Subreddit: <span>{{ subreddit }}</span></div>
+        </div>
+        <button class="refresh-btn" id="refresh-btn">Refresh Meme</button>
+    </main>
+    <footer>
+        <p>Made by Mazur23</p>
+    </footer>
+    <script>
+    //Theme toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.onclick = () => {
+        document.body.classList.toggle('dark');
+        themeToggle.textContent = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
+    };
+
+    //Fade-in animation and loader
+    function showMeme(imgUrl, subreddit) {
+        const img = document.getElementById('meme-img');
+        const sub = document.getElementById('subreddit');
+        const loader = document.getElementById('loader');
+        img.style.opacity = 0;
+        img.style.display = 'block';
+        sub.style.display = 'block';
+        loader.style.display = 'none';
+        img.src = imgUrl;
+        sub.innerHTML = 'Subreddit: <span>' + subreddit + '</span>';
+        setTimeout(() => { img.style.opacity = 1; sub.style.opacity = 1; }, 50);
+    }
+
+    document.getElementById('refresh-btn').onclick = async function() {
+        const img = document.getElementById('meme-img');
+        const sub = document.getElementById('subreddit');
+        const loader = document.getElementById('loader');
+        img.style.display = 'none';
+        sub.style.display = 'none';
+        loader.style.display = 'block';
+        try {
+            const res = await fetch(window.location.pathname + 'api');
+            const data = await res.json();
+            showMeme(data.meme_pic, data.subreddit);
+        } catch {
+            showMeme('/static/fallback.png', 'API error');
+        }
+    };
+
+    //Initial fade-in
+    window.onload = () => {
+        showMeme("{{ meme_pic }}", "{{ subreddit }}");
+    };
+    </script>
+</body>
+</html>
